@@ -6,7 +6,7 @@ import ThreeBackground from '@/components/ThreeBackground';
 import { Button } from '@/components/ui/button';
 
 const HeroSection = () => {
-  const heroRef = useRef<HTMLElement>(null);
+  const heroRef = useRef<HTMLDivElement>(null);
   const titleRef = useRef<HTMLHeadingElement>(null);
   const subtitleRef = useRef<HTMLHeadingElement>(null);
   const descriptionRef = useRef<HTMLParagraphElement>(null);

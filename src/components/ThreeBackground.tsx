@@ -1,7 +1,6 @@
 
 import { useRef, useEffect } from 'react';
 import { Canvas, useFrame } from '@react-three/fiber';
-import { Points, PointMaterial } from '@react-three/drei';
 import * as THREE from 'three';
 
 const ParticleField = () => {
@@ -21,8 +20,16 @@ const ParticleField = () => {
   });
 
   return (
-    <Points ref={ref} positions={particlesPosition} stride={3} frustumCulled={false}>
-      <PointMaterial
+    <points ref={ref} frustumCulled={false}>
+      <bufferGeometry>
+        <bufferAttribute
+          attach="attributes-position"
+          count={particlesPosition.length / 3}
+          array={particlesPosition}
+          itemSize={3}
+        />
+      </bufferGeometry>
+      <pointsMaterial
         transparent
         color="#10B981"
         size={0.02}
@@ -30,7 +37,7 @@ const ParticleField = () => {
         depthWrite={false}
         opacity={0.8}
       />
-    </Points>
+    </points>
   );
 };
 
