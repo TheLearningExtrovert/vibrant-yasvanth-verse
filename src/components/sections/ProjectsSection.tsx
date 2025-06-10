@@ -88,43 +88,47 @@ const ProjectsSection = () => {
   };
 
   return (
-    <section id="projects" ref={sectionRef} className="py-20 bg-portfolio-yellow text-portfolio-text">
+    <section id="projects" ref={sectionRef} className="py-12 sm:py-20 themed-background section-enhanced">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="text-center mb-16">
-          <h2 className="text-3xl sm:text-4xl md:text-section-title font-bold font-poppins mb-4">
+        <div className="text-center mb-12 sm:mb-16">
+          <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-section-title font-bold font-poppins mb-4 themed-text-glow" style={{ color: 'hsl(var(--themed-text))' }}>
             Featured Projects
           </h2>
-          <div className="w-24 h-1 bg-portfolio-primary mx-auto rounded-full mb-6"></div>
-          <p className="text-lg md:text-xl text-portfolio-text text-opacity-80 max-w-2xl mx-auto">
+          <div className="w-16 sm:w-24 h-1 mx-auto rounded-full mb-4 sm:mb-6" style={{ backgroundColor: 'hsl(var(--themed-primary))' }}></div>
+          <p className="text-base sm:text-lg md:text-xl max-w-2xl mx-auto opacity-90" style={{ color: 'hsl(var(--themed-text-secondary))' }}>
             Showcasing innovative solutions and technical excellence across various domains
           </p>
         </div>
 
         {/* Project Filters */}
-        <div className="flex flex-wrap justify-center gap-4 mb-12">
+        <div className="flex flex-wrap justify-center gap-2 sm:gap-4 mb-8 sm:mb-12">
           {categories.map((category) => (
             <Button
               key={category}
               onClick={() => handleFilterChange(category)}
-              variant={activeFilter === category ? "default" : "outline"}
-              className={`px-6 py-2 rounded-full font-medium transition-all duration-300 ${
+              className={`px-4 sm:px-6 py-2 rounded-full font-medium transition-all duration-300 text-sm sm:text-base ${
                 activeFilter === category
-                  ? 'bg-portfolio-primary text-white shadow-lg'
-                  : 'border-portfolio-primary text-portfolio-primary hover:bg-portfolio-primary hover:text-white'
+                  ? 'themed-border-glow shadow-lg'
+                  : 'border border-opacity-30 hover:scale-105'
               }`}
+              style={{
+                backgroundColor: activeFilter === category ? 'hsl(var(--themed-primary))' : 'hsl(var(--themed-surface))',
+                color: activeFilter === category ? 'hsl(var(--themed-background))' : 'hsl(var(--themed-text))',
+                borderColor: 'hsl(var(--themed-primary))'
+              }}
             >
-              <Filter className="w-4 h-4 mr-2" />
+              <Filter className="w-3 h-3 sm:w-4 sm:h-4 mr-1 sm:mr-2" />
               {category}
             </Button>
           ))}
         </div>
 
         {/* Projects Grid */}
-        <div ref={projectsRef} className="grid md:grid-cols-2 lg:grid-cols-2 gap-8">
+        <div ref={projectsRef} className="grid sm:grid-cols-1 lg:grid-cols-2 gap-6 sm:gap-8">
           {filteredProjects.map((project, index) => (
             <div
               key={index}
-              className={`project-card bg-white rounded-xl overflow-hidden card-shadow hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-2 ${
+              className={`project-card themed-card rounded-xl overflow-hidden hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-2 ${
                 project.featured ? 'lg:col-span-1' : ''
               }`}
             >
@@ -132,54 +136,86 @@ const ProjectsSection = () => {
                 <img
                   src={project.image}
                   alt={project.title}
-                  className="w-full h-48 object-cover transition-transform duration-300 hover:scale-110"
+                  className="w-full h-40 sm:h-48 object-cover transition-transform duration-300 hover:scale-110"
                 />
                 <div className="absolute top-4 right-4">
-                  <span className="bg-portfolio-primary text-white px-3 py-1 rounded-full text-sm font-medium">
+                  <span 
+                    className="px-3 py-1 rounded-full text-xs sm:text-sm font-medium"
+                    style={{
+                      backgroundColor: 'hsl(var(--themed-primary))',
+                      color: 'hsl(var(--themed-background))'
+                    }}
+                  >
                     {project.category}
                   </span>
                 </div>
               </div>
 
-              <div className="p-6">
-                <h3 className="text-xl font-bold mb-3 font-poppins text-portfolio-primary">
+              <div className="p-4 sm:p-6">
+                <h3 className="text-lg sm:text-xl font-bold mb-3 font-poppins themed-text-glow" style={{ color: 'hsl(var(--themed-primary))' }}>
                   {project.title}
                 </h3>
                 
-                <p className="text-gray-600 mb-4 leading-relaxed">
+                <p className="mb-4 leading-relaxed text-sm sm:text-base" style={{ color: 'hsl(var(--themed-text-secondary))' }}>
                   {project.description}
                 </p>
 
-                <div className="flex flex-wrap gap-2 mb-6">
+                <div className="flex flex-wrap gap-2 mb-4 sm:mb-6">
                   {project.technologies.map((tech, techIndex) => (
                     <span
                       key={techIndex}
-                      className="bg-portfolio-secondary bg-opacity-10 text-portfolio-secondary px-3 py-1 rounded-full text-sm font-medium"
+                      className="px-2 sm:px-3 py-1 rounded-full text-xs sm:text-sm font-medium"
+                      style={{
+                        backgroundColor: 'hsl(var(--themed-secondary) / 0.2)',
+                        color: 'hsl(var(--themed-secondary))'
+                      }}
                     >
                       {tech}
                     </span>
                   ))}
                 </div>
 
-                <div className="flex gap-4">
+                <div className="flex flex-col sm:flex-row gap-2 sm:gap-4">
                   {project.github && (
                     <Button
-                      variant="outline"
                       size="sm"
-                      className="border-portfolio-primary text-portfolio-primary hover:bg-portfolio-primary hover:text-white"
+                      className="border transition-all duration-300 hover:scale-105 text-sm"
+                      style={{
+                        borderColor: 'hsl(var(--themed-primary))',
+                        backgroundColor: 'transparent',
+                        color: 'hsl(var(--themed-primary))'
+                      }}
+                      onMouseEnter={(e) => {
+                        e.currentTarget.style.backgroundColor = 'hsl(var(--themed-primary))';
+                        e.currentTarget.style.color = 'hsl(var(--themed-background))';
+                      }}
+                      onMouseLeave={(e) => {
+                        e.currentTarget.style.backgroundColor = 'transparent';
+                        e.currentTarget.style.color = 'hsl(var(--themed-primary))';
+                      }}
                       onClick={() => window.open(project.github, '_blank')}
                     >
-                      <Github className="w-4 h-4 mr-2" />
+                      <Github className="w-3 h-3 sm:w-4 sm:h-4 mr-1 sm:mr-2" />
                       Code
                     </Button>
                   )}
                   {project.live && (
                     <Button
                       size="sm"
-                      className="bg-portfolio-secondary hover:bg-portfolio-secondary/90 text-white"
+                      className="transition-all duration-300 hover:scale-105 text-sm"
+                      style={{
+                        backgroundColor: 'hsl(var(--themed-secondary))',
+                        color: 'hsl(var(--themed-background))'
+                      }}
+                      onMouseEnter={(e) => {
+                        e.currentTarget.style.opacity = '0.9';
+                      }}
+                      onMouseLeave={(e) => {
+                        e.currentTarget.style.opacity = '1';
+                      }}
                       onClick={() => window.open(project.live, '_blank')}
                     >
-                      <ExternalLink className="w-4 h-4 mr-2" />
+                      <ExternalLink className="w-3 h-3 sm:w-4 sm:h-4 mr-1 sm:mr-2" />
                       Live Demo
                     </Button>
                   )}

@@ -1,4 +1,3 @@
-
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -233,7 +232,13 @@
 
   /* Custom scrollbar for themes */
   ::-webkit-scrollbar {
-    width: 12px;
+    width: 8px;
+  }
+
+  @media (min-width: 640px) {
+    ::-webkit-scrollbar {
+      width: 12px;
+    }
   }
 
   ::-webkit-scrollbar-track {
@@ -254,6 +259,21 @@
       hsl(var(--themed-secondary)), 
       hsl(var(--themed-accent))
     );
+  }
+
+  /* Mobile optimizations */
+  @media (max-width: 640px) {
+    .themed-card {
+      box-shadow: 0 4px 16px hsl(var(--themed-glow) / 0.1);
+    }
+    
+    .themed-text-glow {
+      text-shadow: 0 0 10px hsl(var(--themed-glow) / 0.3);
+    }
+    
+    .particles::before {
+      background-size: 50px 50px;
+    }
   }
 }
 
@@ -305,4 +325,27 @@ button:focus-visible,
 a:focus-visible {
   outline: 2px solid hsl(var(--themed-primary));
   outline-offset: 2px;
+}
+
+/* Mobile-first responsive utilities */
+@media (max-width: 475px) {
+  .container {
+    padding-left: 1rem;
+    padding-right: 1rem;
+  }
+}
+
+/* Enhanced mobile navigation */
+@media (max-width: 768px) {
+  .nav-glass {
+    backdrop-filter: blur(15px);
+  }
+}
+
+/* Better mobile touch targets */
+@media (max-width: 640px) {
+  button {
+    min-height: 44px;
+    min-width: 44px;
+  }
 }
