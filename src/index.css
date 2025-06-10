@@ -1,8 +1,9 @@
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
-/* Definition of the design system. All colors, gradients, fonts, etc should be defined here. */
+/* Design System - Custom Colors and Variables */
 
 @layer base {
   :root {
@@ -15,7 +16,7 @@
     --popover: 0 0% 100%;
     --popover-foreground: 222.2 84% 4.9%;
 
-    --primary: 222.2 47.4% 11.2%;
+    --primary: 215 28% 17%;
     --primary-foreground: 210 40% 98%;
 
     --secondary: 210 40% 96.1%;
@@ -34,22 +35,31 @@
     --input: 214.3 31.8% 91.4%;
     --ring: 222.2 84% 4.9%;
 
-    --radius: 0.5rem;
+    --radius: 0.75rem;
+
+    /* Custom Portfolio Colors */
+    --portfolio-primary: 215 28% 17%; /* #2D3748 */
+    --portfolio-secondary: 158 64% 52%; /* #10B981 */
+    --portfolio-accent: 327 73% 70%; /* #F472B6 */
+    --portfolio-background: 0 0% 100%; /* #FFFFFF */
+    --portfolio-text: 0 0% 0%; /* #000000 */
+
+    /* Additional Colors */
+    --portfolio-purple: 239 84% 67%; /* #4B5EAA */
+    --portfolio-yellow: 45 93% 58%; /* #FBBF24 */
+    --portfolio-blue: 217 91% 60%; /* #3B82F6 */
+    --portfolio-indigo: 239 84% 67%; /* #6366F1 */
+    --portfolio-pink: 327 87% 67%; /* #EC4899 */
+    --portfolio-teal: 172 66% 50%; /* #14B8A6 */
+    --portfolio-orange: 38 92% 50%; /* #F59E0B */
 
     --sidebar-background: 0 0% 98%;
-
     --sidebar-foreground: 240 5.3% 26.1%;
-
     --sidebar-primary: 240 5.9% 10%;
-
     --sidebar-primary-foreground: 0 0% 98%;
-
     --sidebar-accent: 240 4.8% 95.9%;
-
     --sidebar-accent-foreground: 240 5.9% 10%;
-
     --sidebar-border: 220 13% 91%;
-
     --sidebar-ring: 217.2 91.2% 59.8%;
   }
 
@@ -98,6 +108,102 @@
   }
 
   body {
-    @apply bg-background text-foreground;
+    @apply bg-background text-foreground font-inter;
+    scroll-behavior: smooth;
   }
+
+  html {
+    scroll-behavior: smooth;
+  }
+
+  /* Custom text shadows */
+  .text-shadow {
+    text-shadow: 0 2px 4px rgba(0,0,0,0.2);
+  }
+
+  /* Gradient backgrounds */
+  .gradient-primary {
+    background: linear-gradient(to right, hsl(var(--portfolio-primary)), hsl(var(--portfolio-secondary)));
+  }
+
+  .gradient-hero {
+    background: linear-gradient(to bottom, hsl(var(--portfolio-primary)), hsl(var(--portfolio-purple)));
+  }
+
+  /* Card shadows */
+  .card-shadow {
+    box-shadow: 0 6px 12px rgba(0,0,0,0.15);
+  }
+
+  /* Custom scrollbar */
+  ::-webkit-scrollbar {
+    width: 8px;
+  }
+
+  ::-webkit-scrollbar-track {
+    background: hsl(var(--muted));
+  }
+
+  ::-webkit-scrollbar-thumb {
+    background: hsl(var(--portfolio-secondary));
+    border-radius: 4px;
+  }
+
+  ::-webkit-scrollbar-thumb:hover {
+    background: hsl(var(--portfolio-primary));
+  }
+}
+
+/* Animation keyframes for GSAP fallbacks */
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes slideInLeft {
+  from {
+    opacity: 0;
+    transform: translateX(-30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes scaleIn {
+  from {
+    opacity: 0;
+    transform: scale(0.9);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+/* Utility classes */
+.animate-fadeInUp {
+  animation: fadeInUp 0.6s ease-out;
+}
+
+.animate-slideInLeft {
+  animation: slideInLeft 0.6s ease-out;
+}
+
+.animate-scaleIn {
+  animation: scaleIn 0.6s ease-out;
+}
+
+/* Focus states for accessibility */
+button:focus-visible,
+a:focus-visible {
+  outline: 2px solid hsl(var(--portfolio-secondary));
+  outline-offset: 2px;
 }
