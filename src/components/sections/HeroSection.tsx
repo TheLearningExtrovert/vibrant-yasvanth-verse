@@ -59,7 +59,7 @@ const HeroSection = () => {
   };
 
   return (
-    <section id="home" className="relative min-h-screen flex items-center justify-center overflow-hidden gradient-hero">
+    <section id="home" className="relative min-h-screen flex items-center justify-center overflow-hidden hero-enhanced particles">
       {/* Three.js Background */}
       <div className="absolute inset-0 z-0">
         <ThreeBackground />
@@ -67,24 +67,27 @@ const HeroSection = () => {
 
       {/* Hero Content */}
       <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-        <div ref={heroRef} className="space-y-8">
+        <div ref={heroRef} className="space-y-8 floating-animation">
           <h1
             ref={titleRef}
-            className="text-4xl sm:text-5xl md:text-6xl lg:text-hero font-bold text-white font-poppins text-shadow"
+            className="text-4xl sm:text-5xl md:text-6xl lg:text-hero font-bold themed-text-glow font-poppins"
+            style={{ color: 'hsl(var(--themed-text))' }}
           >
             Pendyala Yasvanth
           </h1>
           
           <h2
             ref={subtitleRef}
-            className="text-xl sm:text-2xl md:text-3xl lg:text-section-title font-semibold text-portfolio-secondary font-inter text-shadow"
+            className="text-xl sm:text-2xl md:text-3xl lg:text-section-title font-semibold font-inter"
+            style={{ color: 'hsl(var(--themed-text-secondary))' }}
           >
             Full-Stack & AI Innovator
           </h2>
           
           <p
             ref={descriptionRef}
-            className="text-lg sm:text-xl md:text-body-large text-white text-opacity-90 max-w-3xl mx-auto leading-relaxed font-inter"
+            className="text-lg sm:text-xl md:text-body-large max-w-3xl mx-auto leading-relaxed font-inter opacity-90"
+            style={{ color: 'hsl(var(--themed-text))' }}
           >
             Crafting scalable applications with React Native, Node.js, and cutting-edge AI tools. 
             Transforming ideas into innovative digital solutions.
@@ -94,7 +97,11 @@ const HeroSection = () => {
             <Button
               onClick={scrollToProjects}
               size="lg"
-              className="bg-portfolio-secondary hover:bg-portfolio-secondary/90 text-portfolio-text font-semibold px-8 py-4 rounded-lg transition-all duration-300 transform hover:scale-105 hover:shadow-lg group"
+              className="themed-border-glow pulse-glow font-semibold px-8 py-4 rounded-lg transition-all duration-300 transform hover:scale-105 group"
+              style={{
+                background: `linear-gradient(135deg, hsl(var(--themed-primary)), hsl(var(--themed-secondary)))`,
+                color: 'hsl(var(--themed-text))'
+              }}
             >
               Explore Work
               <ArrowRight className="ml-2 h-5 w-5 group-hover:translate-x-1 transition-transform" />
@@ -103,7 +110,12 @@ const HeroSection = () => {
             <Button
               variant="outline"
               size="lg"
-              className="border-2 border-white text-white hover:bg-white hover:text-portfolio-primary font-semibold px-8 py-4 rounded-lg transition-all duration-300 transform hover:scale-105 hover:shadow-lg group"
+              className="themed-border-glow font-semibold px-8 py-4 rounded-lg transition-all duration-300 transform hover:scale-105 group"
+              style={{
+                borderColor: `hsl(var(--themed-primary))`,
+                color: `hsl(var(--themed-text))`,
+                background: `hsl(var(--themed-surface) / 0.5)`
+              }}
             >
               <Download className="mr-2 h-5 w-5 group-hover:translate-y-1 transition-transform" />
               Download Resume
@@ -112,10 +124,16 @@ const HeroSection = () => {
         </div>
       </div>
 
-      {/* Scroll Indicator */}
+      {/* Enhanced Scroll Indicator */}
       <div className="absolute bottom-8 left-1/2 transform -translate-x-1/2 z-10">
-        <div className="w-6 h-10 border-2 border-white rounded-full flex justify-center">
-          <div className="w-1 h-3 bg-white rounded-full mt-2 animate-bounce-gentle"></div>
+        <div 
+          className="w-6 h-10 rounded-full flex justify-center themed-border-glow"
+          style={{ borderColor: `hsl(var(--themed-primary))` }}
+        >
+          <div 
+            className="w-1 h-3 rounded-full mt-2 animate-bounce-gentle"
+            style={{ background: `hsl(var(--themed-primary))` }}
+          />
         </div>
       </div>
     </section>

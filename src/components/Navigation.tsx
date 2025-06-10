@@ -60,12 +60,15 @@ const Navigation = () => {
   };
 
   return (
-    <nav className="fixed top-0 left-0 right-0 z-50 gradient-primary backdrop-blur-md bg-opacity-90">
+    <nav className="fixed top-0 left-0 right-0 z-50 nav-glass">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-16">
           {/* Logo */}
           <div className="flex-shrink-0">
-            <span className="text-2xl font-bold text-white font-poppins nav-item">
+            <span 
+              className="text-2xl font-bold font-poppins nav-item themed-text-glow"
+              style={{ color: 'hsl(var(--themed-text))' }}
+            >
               Yasvanth
             </span>
           </div>
@@ -77,11 +80,19 @@ const Navigation = () => {
                 <button
                   key={item.name}
                   onClick={() => handleNavClick(item.href)}
-                  className={`nav-item px-3 py-2 rounded-md text-sm font-medium transition-all duration-300 hover:bg-white hover:bg-opacity-20 focus:outline-none focus:ring-2 focus:ring-white focus:ring-opacity-50 ${
+                  className={`nav-item px-3 py-2 rounded-md text-sm font-medium transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-opacity-50 ${
                     activeSection === item.href.slice(1)
-                      ? 'bg-white bg-opacity-20 text-white'
-                      : 'text-white text-opacity-90 hover:text-white'
+                      ? 'themed-border-glow'
+                      : 'hover:themed-border-glow'
                   }`}
+                  style={{
+                    color: activeSection === item.href.slice(1) 
+                      ? 'hsl(var(--themed-text))' 
+                      : 'hsl(var(--themed-text-secondary))',
+                    background: activeSection === item.href.slice(1) 
+                      ? 'hsl(var(--themed-primary) / 0.2)' 
+                      : 'transparent'
+                  }}
                   aria-label={`Navigate to ${item.name} section`}
                 >
                   {item.name}
@@ -94,7 +105,8 @@ const Navigation = () => {
           <div className="md:hidden">
             <button
               onClick={() => setIsOpen(!isOpen)}
-              className="nav-item inline-flex items-center justify-center p-2 rounded-md text-white hover:bg-white hover:bg-opacity-20 focus:outline-none focus:ring-2 focus:ring-white focus:ring-opacity-50"
+              className="nav-item inline-flex items-center justify-center p-2 rounded-md themed-border-glow focus:outline-none focus:ring-2 focus:ring-opacity-50"
+              style={{ color: 'hsl(var(--themed-text))' }}
               aria-expanded="false"
               aria-label="Toggle navigation menu"
             >
@@ -107,16 +119,24 @@ const Navigation = () => {
       {/* Mobile Navigation */}
       {isOpen && (
         <div className="md:hidden">
-          <div className="px-2 pt-2 pb-3 space-y-1 gradient-primary bg-opacity-95">
+          <div className="px-2 pt-2 pb-3 space-y-1 themed-surface">
             {navigationItems.map((item) => (
               <button
                 key={item.name}
                 onClick={() => handleNavClick(item.href)}
-                className={`block px-3 py-2 rounded-md text-base font-medium w-full text-left transition-all duration-300 hover:bg-white hover:bg-opacity-20 focus:outline-none focus:ring-2 focus:ring-white focus:ring-opacity-50 ${
+                className={`block px-3 py-2 rounded-md text-base font-medium w-full text-left transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-opacity-50 ${
                   activeSection === item.href.slice(1)
-                    ? 'bg-white bg-opacity-20 text-white'
-                    : 'text-white text-opacity-90 hover:text-white'
+                    ? 'themed-border-glow'
+                    : 'hover:themed-border-glow'
                 }`}
+                style={{
+                  color: activeSection === item.href.slice(1) 
+                    ? 'hsl(var(--themed-text))' 
+                    : 'hsl(var(--themed-text-secondary))',
+                  background: activeSection === item.href.slice(1) 
+                    ? 'hsl(var(--themed-primary) / 0.2)' 
+                    : 'transparent'
+                }}
               >
                 {item.name}
               </button>

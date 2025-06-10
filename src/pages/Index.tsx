@@ -1,4 +1,3 @@
-
 import { useEffect } from 'react';
 import Navigation from '@/components/Navigation';
 import HeroSection from '@/components/sections/HeroSection';
@@ -11,6 +10,7 @@ import CertificationsSection from '@/components/sections/CertificationsSection';
 import BlogSection from '@/components/sections/BlogSection';
 import SocialMediaSection from '@/components/sections/SocialMediaSection';
 import ContactSection from '@/components/sections/ContactSection';
+import ThemeSwitcher from '@/components/ThemeSwitcher';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 
@@ -48,8 +48,9 @@ const Index = () => {
   }, []);
 
   return (
-    <div className="min-h-screen bg-portfolio-background">
+    <div className="min-h-screen themed-background transition-all duration-500">
       <Navigation />
+      <ThemeSwitcher />
       
       <main className="relative">
         <HeroSection />
