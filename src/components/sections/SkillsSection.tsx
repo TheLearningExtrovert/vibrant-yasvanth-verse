@@ -83,6 +83,13 @@ const SkillsSection = () => {
     const section = sectionRef.current;
     if (!section) return;
 
+    // Get computed style values to avoid CSS custom property issues
+    const getComputedColor = (property: string) => {
+      const style = getComputedStyle(document.documentElement);
+      const value = style.getPropertyValue(property).trim();
+      return value || '#6366f1'; // fallback color
+    };
+
     // Epic skill cards animation
     gsap.fromTo(
       skillsRef.current?.children || [],
@@ -135,41 +142,27 @@ const SkillsSection = () => {
       }
     );
 
-    // Skill bars with wave-like animation
+    // Skill bars with wave-like animation - using CSS classes instead of direct color values
     const skillBars = section.querySelectorAll('.skill-bar');
     skillBars.forEach((bar, index) => {
       const percentage = parseInt(bar.getAttribute('data-value') || '0');
       
-      gsap.fromTo(
-        bar,
-        { 
-          width: '0%',
-          background: 'hsl(var(--themed-surface))',
-          boxShadow: 'none'
-        },
-        {
-          width: `${percentage}%`,
-          background: `linear-gradient(90deg, hsl(var(--themed-secondary)), hsl(var(--themed-primary)))`,
-          boxShadow: '0 0 20px hsl(var(--themed-glow) / 0.5)',
-          duration: 2,
-          delay: index * 0.1,
-          ease: "power3.out",
-          scrollTrigger: {
-            trigger: section,
-            start: "top 60%",
-            toggleActions: "play none none reverse"
-          }
-        }
-      );
+      // Set initial state
+      gsap.set(bar, {
+        width: '0%'
+      });
 
-      // Add pulsing glow effect
+      // Animate width
       gsap.to(bar, {
-        boxShadow: '0 0 30px hsl(var(--themed-glow) / 0.8)',
+        width: `${percentage}%`,
         duration: 2,
-        repeat: -1,
-        yoyo: true,
-        ease: "power2.inOut",
-        delay: 2 + index * 0.1
+        delay: index * 0.1,
+        ease: "power3.out",
+        scrollTrigger: {
+          trigger: section,
+          start: "top 60%",
+          toggleActions: "play none none reverse"
+        }
       });
     });
 
@@ -188,6 +181,10 @@ const SkillsSection = () => {
         });
       });
     }
+
+    return () => {
+      ScrollTrigger.getAll().forEach(t => t.kill());
+    };
   }, []);
 
   return (
@@ -201,13 +198,13 @@ const SkillsSection = () => {
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         <AnimatedSection animation="scale" className="text-center mb-12 sm:mb-16">
-          <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-section-title font-bold font-poppins mb-4 themed-text-glow" style={{ color: 'hsl(var(--themed-text))' }}>
+          <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-section-title font-bold font-poppins mb-4 themed-text-glow text-themed-text">
             <TextReveal animation="wave">Technical Skills</TextReveal>
           </h2>
-          <div className="w-16 sm:w-24 h-1 mx-auto rounded-full mb-4 sm:mb-6 relative overflow-hidden" style={{ backgroundColor: 'hsl(var(--themed-primary))' }}>
+          <div className="w-16 sm:w-24 h-1 mx-auto rounded-full mb-4 sm:mb-6 relative overflow-hidden bg-themed-primary">
             <div className="absolute inset-0 bg-gradient-to-r from-themed-primary via-themed-secondary to-themed-accent animate-pulse" />
           </div>
-          <p className="text-base sm:text-lg md:text-xl max-w-2xl mx-auto opacity-90" style={{ color: 'hsl(var(--themed-text-secondary))' }}>
+          <p className="text-base sm:text-lg md:text-xl max-w-2xl mx-auto opacity-90 text-themed-text-secondary">
             <TextReveal animation="typewriter">
               A comprehensive overview of my technical expertise and proficiency levels
             </TextReveal>
@@ -223,21 +220,20 @@ const SkillsSection = () => {
                   {/* Card glow effect */}
                   <div className="absolute inset-0 bg-gradient-to-br from-themed-primary/10 via-transparent to-themed-secondary/10 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
                   
-                  <h3 className="text-lg sm:text-xl font-bold mb-3 sm:mb-4 font-poppins relative z-10" style={{ color: 'hsl(var(--themed-secondary))' }}>
+                  <h3 className="text-lg sm:text-xl font-bold mb-3 sm:mb-4 font-poppins relative z-10 text-themed-secondary">
                     {category.category}
                   </h3>
                   <div className="space-y-3 relative z-10">
                     {category.skills.map((skill, skillIndex) => (
                       <div key={skillIndex} className="space-y-2">
                         <div className="flex justify-between items-center">
-                          <span className="font-medium text-sm sm:text-base" style={{ color: 'hsl(var(--themed-text))' }}>{skill.name}</span>
-                          <span className="text-xs sm:text-sm opacity-80 font-bold" style={{ color: 'hsl(var(--themed-text-secondary))' }}>{skill.value}%</span>
+                          <span className="font-medium text-sm sm:text-base text-themed-text">{skill.name}</span>
+                          <span className="text-xs sm:text-sm opacity-80 font-bold text-themed-text-secondary">{skill.value}%</span>
                         </div>
-                        <div className="w-full rounded-full h-3 relative overflow-hidden" style={{ backgroundColor: 'hsl(var(--themed-surface))' }}>
+                        <div className="w-full rounded-full h-3 relative overflow-hidden bg-themed-surface/50">
                           <div
-                            className="skill-bar h-3 rounded-full transition-all duration-500 relative overflow-hidden"
+                            className="skill-bar h-3 rounded-full transition-all duration-500 relative overflow-hidden bg-gradient-to-r from-themed-secondary to-themed-primary"
                             data-value={skill.value}
-                            style={{ backgroundColor: 'hsl(var(--themed-secondary))' }}
                           >
                             <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/30 to-transparent animate-pulse" />
                           </div>
@@ -257,7 +253,7 @@ const SkillsSection = () => {
               <div className="absolute inset-0 bg-gradient-to-br from-themed-primary/5 to-themed-secondary/5" />
               <div className="absolute top-4 right-4 w-16 h-16 bg-themed-accent/20 rounded-full blur-xl animate-pulse" />
               
-              <h3 className="text-xl sm:text-2xl font-bold mb-4 sm:mb-6 text-center font-poppins relative z-10" style={{ color: 'hsl(var(--themed-text))' }}>
+              <h3 className="text-xl sm:text-2xl font-bold mb-4 sm:mb-6 text-center font-poppins relative z-10 text-themed-text">
                 <TextReveal animation="glitch">Skills Overview</TextReveal>
               </h3>
               <div className="h-64 sm:h-80 relative z-10">

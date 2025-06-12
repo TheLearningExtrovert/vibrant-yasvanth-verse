@@ -1,3 +1,4 @@
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -348,10 +349,12 @@
     box-shadow: 0 0 20px hsl(var(--themed-glow) / 0.5);
   }
 
-  /* Skill bars with epic effects */
+  /* Skill bars with epic effects - Fixed to avoid GSAP color issues */
   .skill-bar {
     position: relative;
     overflow: hidden;
+    background: linear-gradient(90deg, hsl(var(--themed-secondary)), hsl(var(--themed-primary))) !important;
+    box-shadow: 0 0 20px hsl(var(--themed-glow) / 0.5);
   }
 
   .skill-bar::before {
