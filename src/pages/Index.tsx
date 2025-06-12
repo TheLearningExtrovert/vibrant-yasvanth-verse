@@ -1,3 +1,4 @@
+
 import { useEffect } from 'react';
 import Navigation from '@/components/Navigation';
 import HeroSection from '@/components/sections/HeroSection';
@@ -11,6 +12,7 @@ import BlogSection from '@/components/sections/BlogSection';
 import SocialMediaSection from '@/components/sections/SocialMediaSection';
 import ContactSection from '@/components/sections/ContactSection';
 import ThemeSwitcher from '@/components/ThemeSwitcher';
+import ParticleBackground from '@/components/animations/ParticleBackground';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 
@@ -20,27 +22,40 @@ if (typeof window !== 'undefined') {
 
 const Index = () => {
   useEffect(() => {
-    // Initialize GSAP animations
-    gsap.fromTo(
-      ".animate-on-load",
-      { opacity: 0, y: 30 },
-      { opacity: 1, y: 0, duration: 0.8, stagger: 0.2, ease: "power2.out" }
+    // Epic page load animation
+    const tl = gsap.timeline();
+    
+    tl.fromTo(
+      "body",
+      { opacity: 0 },
+      { opacity: 1, duration: 0.5, ease: "power2.out" }
     );
 
-    // Smooth scroll setup
+    // Enhanced smooth scroll behavior
     const lenis = {
-      duration: 1.2,
+      duration: 1.4,
       easing: (t: number) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
       direction: 'vertical',
       gestureDirection: 'vertical',
       smooth: true,
-      mouseMultiplier: 1,
+      mouseMultiplier: 1.2,
       smoothTouch: false,
       touchMultiplier: 2,
       infinite: false,
     };
 
-    console.log('Portfolio initialized with GSAP and smooth scrolling');
+    // Add epic page transitions
+    ScrollTrigger.create({
+      trigger: "body",
+      start: "top top",
+      end: "bottom bottom",
+      onUpdate: (self) => {
+        const progress = self.progress;
+        document.documentElement.style.setProperty('--scroll-progress', progress.toString());
+      }
+    });
+
+    console.log('Epic portfolio initialized with advanced GSAP animations');
 
     return () => {
       ScrollTrigger.getAll().forEach(t => t.kill());
@@ -48,11 +63,14 @@ const Index = () => {
   }, []);
 
   return (
-    <div className="min-h-screen themed-background transition-all duration-500">
+    <div className="min-h-screen themed-background transition-all duration-700 relative overflow-hidden">
+      {/* Global particle background */}
+      <ParticleBackground />
+      
       <Navigation />
       <ThemeSwitcher />
       
-      <main className="relative">
+      <main className="relative z-10">
         <HeroSection />
         <AboutSection />
         <EducationSection />
