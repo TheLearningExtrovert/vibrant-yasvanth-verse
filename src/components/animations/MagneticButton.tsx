@@ -7,13 +7,15 @@ interface MagneticButtonProps {
   className?: string;
   onClick?: () => void;
   magneticStrength?: number;
+  style?: React.CSSProperties;
 }
 
 const MagneticButton = ({ 
   children, 
   className = '', 
   onClick,
-  magneticStrength = 0.3
+  magneticStrength = 0.3,
+  style
 }: MagneticButtonProps) => {
   const buttonRef = useRef<HTMLButtonElement>(null);
 
@@ -57,6 +59,7 @@ const MagneticButton = ({
       ref={buttonRef}
       className={`${className} transform transition-all duration-300 hover:shadow-2xl`}
       onClick={onClick}
+      style={style}
     >
       {children}
     </button>

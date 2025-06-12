@@ -135,24 +135,21 @@ const HeroSection = () => {
         <div ref={heroRef} className="space-y-8 floating-animation">
           <h1
             ref={titleRef}
-            className="text-4xl sm:text-5xl md:text-6xl lg:text-hero font-bold themed-text-glow font-poppins"
-            style={{ color: 'hsl(var(--themed-text))' }}
+            className="text-4xl sm:text-5xl md:text-6xl lg:text-hero font-bold themed-text-glow font-poppins text-themed-text"
           >
             <TextReveal animation="wave">Pendyala Yasvanth</TextReveal>
           </h1>
           
           <h2
             ref={subtitleRef}
-            className="text-xl sm:text-2xl md:text-3xl lg:text-section-title font-semibold font-inter"
-            style={{ color: 'hsl(var(--themed-text-secondary))' }}
+            className="text-xl sm:text-2xl md:text-3xl lg:text-section-title font-semibold font-inter text-themed-text-secondary"
           >
             <TextReveal animation="slideUp">Full-Stack & AI Innovator</TextReveal>
           </h2>
           
           <p
             ref={descriptionRef}
-            className="text-lg sm:text-xl md:text-body-large max-w-3xl mx-auto leading-relaxed font-inter opacity-90"
-            style={{ color: 'hsl(var(--themed-text))' }}
+            className="text-lg sm:text-xl md:text-body-large max-w-3xl mx-auto leading-relaxed font-inter opacity-90 text-themed-text"
           >
             <TextReveal animation="typewriter">
               Crafting scalable applications with React Native, Node.js, and cutting-edge AI tools. 
@@ -163,11 +160,7 @@ const HeroSection = () => {
           <div ref={buttonsRef} className="flex flex-col sm:flex-row gap-4 justify-center items-center">
             <MagneticButton
               onClick={scrollToProjects}
-              className="themed-border-glow pulse-glow font-semibold px-8 py-4 rounded-lg transition-all duration-300 transform hover:scale-110 group relative overflow-hidden"
-              style={{
-                background: `linear-gradient(135deg, hsl(var(--themed-primary)), hsl(var(--themed-secondary)))`,
-                color: 'hsl(var(--themed-text))'
-              }}
+              className="hero-primary-button themed-border-glow pulse-glow font-semibold px-8 py-4 rounded-lg transition-all duration-300 transform hover:scale-110 group relative overflow-hidden"
             >
               <span className="relative z-10 flex items-center">
                 Explore Work
@@ -177,12 +170,7 @@ const HeroSection = () => {
             </MagneticButton>
             
             <MagneticButton
-              className="themed-border-glow font-semibold px-8 py-4 rounded-lg transition-all duration-300 transform hover:scale-110 group relative overflow-hidden backdrop-blur-lg"
-              style={{
-                borderColor: `hsl(var(--themed-primary))`,
-                color: `hsl(var(--themed-text))`,
-                background: `hsl(var(--themed-surface) / 0.5)`
-              }}
+              className="hero-secondary-button themed-border-glow font-semibold px-8 py-4 rounded-lg transition-all duration-300 transform hover:scale-110 group relative overflow-hidden backdrop-blur-lg"
             >
               <span className="relative z-10 flex items-center">
                 <Download className="mr-2 h-5 w-5 group-hover:translate-y-1 transition-transform duration-300" />
@@ -196,14 +184,8 @@ const HeroSection = () => {
 
       {/* Enhanced Scroll Indicator */}
       <div className="absolute bottom-8 left-1/2 transform -translate-x-1/2 z-10">
-        <div 
-          className="w-8 h-12 rounded-full flex justify-center themed-border-glow relative overflow-hidden backdrop-blur-sm"
-          style={{ borderColor: `hsl(var(--themed-primary))` }}
-        >
-          <div 
-            className="w-2 h-4 rounded-full mt-2 animate-bounce-gentle relative"
-            style={{ background: `hsl(var(--themed-primary))` }}
-          />
+        <div className="scroll-indicator w-8 h-12 rounded-full flex justify-center themed-border-glow relative overflow-hidden backdrop-blur-sm">
+          <div className="scroll-dot w-2 h-4 rounded-full mt-2 animate-bounce-gentle relative" />
           <div className="absolute inset-0 bg-gradient-to-b from-transparent to-themed-primary/20 animate-pulse" />
         </div>
       </div>

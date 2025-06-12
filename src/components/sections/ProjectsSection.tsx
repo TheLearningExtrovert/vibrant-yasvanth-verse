@@ -1,4 +1,3 @@
-
 import { useEffect, useRef, useState } from 'react';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
@@ -155,15 +154,9 @@ const ProjectsSection = () => {
               onClick={() => handleFilterChange(category)}
               className={`px-4 sm:px-6 py-2 rounded-full font-medium transition-all duration-500 text-sm sm:text-base relative overflow-hidden ${
                 activeFilter === category
-                  ? 'themed-border-glow shadow-2xl scale-110'
-                  : 'border border-opacity-30 hover:scale-105'
+                  ? 'project-filter-button active themed-border-glow shadow-2xl scale-110'
+                  : 'project-filter-button border border-opacity-30 hover:scale-105'
               }`}
-              style={{
-                backgroundColor: activeFilter === category ? 'hsl(var(--themed-primary))' : 'hsl(var(--themed-surface))',
-                color: activeFilter === category ? 'hsl(var(--themed-background))' : 'hsl(var(--themed-text))',
-                borderColor: 'hsl(var(--themed-primary))',
-                boxShadow: activeFilter === category ? '0 0 30px hsl(var(--themed-glow) / 0.6)' : 'none'
-              }}
             >
               <span className="relative z-10 flex items-center">
                 <Filter className="w-3 h-3 sm:w-4 sm:h-4 mr-1 sm:mr-2" />
@@ -214,11 +207,11 @@ const ProjectsSection = () => {
               </div>
 
               <div className="p-4 sm:p-6 relative z-10">
-                <h3 className="text-lg sm:text-xl font-bold mb-3 font-poppins themed-text-glow group-hover:scale-105 transition-transform duration-300" style={{ color: 'hsl(var(--themed-primary))' }}>
+                <h3 className="text-lg sm:text-xl font-bold mb-3 font-poppins themed-text-glow group-hover:scale-105 transition-transform duration-300 text-themed-primary">
                   {project.title}
                 </h3>
                 
-                <p className="mb-4 leading-relaxed text-sm sm:text-base group-hover:text-opacity-100 transition-all duration-300" style={{ color: 'hsl(var(--themed-text-secondary))' }}>
+                <p className="mb-4 leading-relaxed text-sm sm:text-base group-hover:text-opacity-100 transition-all duration-300 text-themed-text-secondary">
                   {project.description}
                 </p>
 
@@ -241,13 +234,7 @@ const ProjectsSection = () => {
                 <div className="flex flex-col sm:flex-row gap-2 sm:gap-4">
                   {project.github && (
                     <MagneticButton
-                      className="border transition-all duration-300 hover:scale-105 text-sm px-4 py-2 rounded-lg font-medium backdrop-blur-sm"
-                      style={{
-                        borderColor: 'hsl(var(--themed-primary))',
-                        backgroundColor: 'transparent',
-                        color: 'hsl(var(--themed-primary))',
-                        boxShadow: '0 0 10px hsl(var(--themed-glow) / 0.3)'
-                      }}
+                      className="project-button-github border transition-all duration-300 hover:scale-105 text-sm px-4 py-2 rounded-lg font-medium backdrop-blur-sm"
                       onClick={() => window.open(project.github, '_blank')}
                     >
                       <Github className="w-3 h-3 sm:w-4 sm:h-4 mr-1 sm:mr-2" />
@@ -256,12 +243,7 @@ const ProjectsSection = () => {
                   )}
                   {project.live && (
                     <MagneticButton
-                      className="transition-all duration-300 hover:scale-105 text-sm px-4 py-2 rounded-lg font-medium"
-                      style={{
-                        backgroundColor: 'hsl(var(--themed-secondary))',
-                        color: 'hsl(var(--themed-background))',
-                        boxShadow: '0 0 20px hsl(var(--themed-glow) / 0.4)'
-                      }}
+                      className="project-button-live transition-all duration-300 hover:scale-105 text-sm px-4 py-2 rounded-lg font-medium"
                       onClick={() => window.open(project.live, '_blank')}
                     >
                       <ExternalLink className="w-3 h-3 sm:w-4 sm:h-4 mr-1 sm:mr-2" />
