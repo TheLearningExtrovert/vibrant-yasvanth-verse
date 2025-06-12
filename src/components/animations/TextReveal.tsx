@@ -18,7 +18,7 @@ const TextReveal = ({
   animation = 'slideUp',
   trigger = 'scroll'
 }: TextRevealProps) => {
-  const textRef = useRef<HTMLDivElement>(null);
+  const textRef = useRef<HTMLSpanElement>(null);
 
   useEffect(() => {
     const element = textRef.current;
@@ -38,29 +38,29 @@ const TextReveal = ({
         gsap.set(charElements, { opacity: 0 });
         gsap.to(charElements, {
           opacity: 1,
-          duration: 0.05,
-          stagger: 0.05,
+          duration: 0.03,
+          stagger: 0.03,
           ease: "none"
         });
       },
       slideUp: () => {
-        gsap.set(charElements, { y: 100, opacity: 0 });
+        gsap.set(charElements, { y: 50, opacity: 0 });
         gsap.to(charElements, {
           y: 0,
           opacity: 1,
-          duration: 0.8,
+          duration: 0.6,
           stagger: 0.02,
-          ease: "power3.out"
+          ease: "power2.out"
         });
       },
       wave: () => {
-        gsap.set(charElements, { y: 50, opacity: 0, rotation: 15 });
+        gsap.set(charElements, { y: 30, opacity: 0, rotation: 10 });
         gsap.to(charElements, {
           y: 0,
           opacity: 1,
           rotation: 0,
-          duration: 1.2,
-          stagger: 0.03,
+          duration: 0.8,
+          stagger: 0.02,
           ease: "elastic.out(1, 0.3)"
         });
       },
@@ -71,15 +71,15 @@ const TextReveal = ({
         charElements.forEach((char, i) => {
           tl.to(char, {
             opacity: 1,
-            x: Math.random() * 20 - 10,
-            y: Math.random() * 10 - 5,
+            x: Math.random() * 10 - 5,
+            y: Math.random() * 5 - 2.5,
             duration: 0.1,
             ease: "power2.out"
           }, i * 0.02)
           .to(char, {
             x: 0,
             y: 0,
-            duration: 0.3,
+            duration: 0.2,
             ease: "power2.out"
           }, i * 0.02 + 0.1);
         });
@@ -89,7 +89,7 @@ const TextReveal = ({
     if (trigger === 'scroll') {
       ScrollTrigger.create({
         trigger: element,
-        start: "top 80%",
+        start: "top 85%",
         onEnter: () => animations[animation]()
       });
     } else {
@@ -102,7 +102,7 @@ const TextReveal = ({
   }, [children, animation, trigger]);
 
   return (
-    <div ref={textRef} className={className} style={{ overflow: 'hidden' }} />
+    <span ref={textRef} className={className} style={{ overflow: 'hidden', display: 'inline-block' }} />
   );
 };
 

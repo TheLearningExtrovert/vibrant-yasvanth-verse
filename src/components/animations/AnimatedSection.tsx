@@ -28,28 +28,28 @@ const AnimatedSection = ({
 
     const animationConfig = {
       fadeUp: {
-        from: { opacity: 0, y: 60, scale: 0.9 },
-        to: { opacity: 1, y: 0, scale: 1, duration: 1.2, ease: "power3.out" }
+        from: { opacity: 0, y: 30, scale: 0.95 },
+        to: { opacity: 1, y: 0, scale: 1, duration: 0.6, ease: "power2.out" }
       },
       fadeLeft: {
-        from: { opacity: 0, x: -80, rotationY: -15 },
-        to: { opacity: 1, x: 0, rotationY: 0, duration: 1.2, ease: "power3.out" }
+        from: { opacity: 0, x: -40, rotationY: -5 },
+        to: { opacity: 1, x: 0, rotationY: 0, duration: 0.6, ease: "power2.out" }
       },
       fadeRight: {
-        from: { opacity: 0, x: 80, rotationY: 15 },
-        to: { opacity: 1, x: 0, rotationY: 0, duration: 1.2, ease: "power3.out" }
+        from: { opacity: 0, x: 40, rotationY: 5 },
+        to: { opacity: 1, x: 0, rotationY: 0, duration: 0.6, ease: "power2.out" }
       },
       scale: {
-        from: { opacity: 0, scale: 0.5, rotation: -10 },
-        to: { opacity: 1, scale: 1, rotation: 0, duration: 1.5, ease: "back.out(1.7)" }
+        from: { opacity: 0, scale: 0.8, rotation: -5 },
+        to: { opacity: 1, scale: 1, rotation: 0, duration: 0.8, ease: "back.out(1.7)" }
       },
       rotate: {
-        from: { opacity: 0, rotation: 180, scale: 0.8 },
-        to: { opacity: 1, rotation: 0, scale: 1, duration: 1.8, ease: "elastic.out(1, 0.5)" }
+        from: { opacity: 0, rotation: 45, scale: 0.9 },
+        to: { opacity: 1, rotation: 0, scale: 1, duration: 0.8, ease: "elastic.out(1, 0.5)" }
       },
       wave: {
-        from: { opacity: 0, y: 100, skewY: 5 },
-        to: { opacity: 1, y: 0, skewY: 0, duration: 1.5, ease: "power4.out" }
+        from: { opacity: 0, y: 50, skewY: 3 },
+        to: { opacity: 1, y: 0, skewY: 0, duration: 0.8, ease: "power3.out" }
       }
     };
 
@@ -65,8 +65,8 @@ const AnimatedSection = ({
         stagger,
         scrollTrigger: {
           trigger: section,
-          start: "top 85%",
-          end: "bottom 15%",
+          start: "top 90%",
+          end: "bottom 10%",
           toggleActions: "play none none reverse"
         }
       }

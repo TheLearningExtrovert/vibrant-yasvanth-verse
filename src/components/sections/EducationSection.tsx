@@ -3,6 +3,7 @@ import { useEffect, useRef } from 'react';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { GraduationCap, Award, Calendar } from 'lucide-react';
+import AnimatedSection from '@/components/animations/AnimatedSection';
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -31,104 +32,59 @@ const educationData = [
 ];
 
 const EducationSection = () => {
-  const sectionRef = useRef<HTMLElement>(null);
-  const timelineRef = useRef<HTMLDivElement>(null);
-
-  useEffect(() => {
-    const section = sectionRef.current;
-    const timeline = timelineRef.current;
-
-    if (section && timeline) {
-      const items = timeline.querySelectorAll('.timeline-item');
-      
-      gsap.fromTo(
-        items,
-        { opacity: 0, x: -50 },
-        {
-          opacity: 1,
-          x: 0,
-          duration: 0.8,
-          stagger: 0.3,
-          ease: "power3.out",
-          scrollTrigger: {
-            trigger: section,
-            start: "top 70%",
-            end: "bottom 30%",
-            toggleActions: "play none none reverse"
-          }
-        }
-      );
-
-      // Animate the timeline line
-      gsap.fromTo(
-        '.timeline-line',
-        { scaleY: 0 },
-        {
-          scaleY: 1,
-          duration: 1.5,
-          ease: "power2.out",
-          scrollTrigger: {
-            trigger: section,
-            start: "top 70%",
-            end: "bottom 30%",
-            toggleActions: "play none none reverse"
-          }
-        }
-      );
-    }
-  }, []);
-
   return (
-    <section id="education" ref={sectionRef} className="py-20 bg-portfolio-accent text-white">
+    <section id="education" className="py-20 section-enhanced">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="text-center mb-16">
-          <h2 className="text-3xl sm:text-4xl md:text-section-title font-bold font-poppins mb-4">
+        <AnimatedSection animation="fadeUp" className="text-center mb-16">
+          <h2 className="text-3xl sm:text-4xl md:text-section-title font-bold font-poppins mb-4 themed-text-glow">
             Education Journey
           </h2>
-          <div className="w-24 h-1 bg-white mx-auto rounded-full mb-6"></div>
-          <p className="text-lg md:text-xl text-white text-opacity-90 max-w-2xl mx-auto">
+          <div className="w-24 h-1 mx-auto rounded-full themed-gradient mb-6"></div>
+          <p className="text-lg md:text-xl max-w-2xl mx-auto" style={{ color: 'hsl(var(--themed-text-secondary))' }}>
             Academic excellence and continuous learning have shaped my technical foundation
           </p>
-        </div>
+        </AnimatedSection>
 
-        <div ref={timelineRef} className="relative max-w-4xl mx-auto">
-          {/* Timeline Line */}
-          <div className="absolute left-8 md:left-1/2 top-0 bottom-0 w-1 bg-white bg-opacity-30 timeline-line origin-top transform md:-translate-x-1/2"></div>
+        <div className="relative max-w-4xl mx-auto">
+          <div className="absolute left-8 md:left-1/2 top-0 bottom-0 w-1 rounded-full themed-gradient transform md:-translate-x-1/2"></div>
 
           <div className="space-y-12">
             {educationData.map((item, index) => (
-              <div key={index} className={`timeline-item relative flex flex-col md:flex-row items-start md:items-center ${
-                index % 2 === 0 ? 'md:flex-row-reverse' : ''
-              }`}>
-                {/* Timeline Node */}
-                <div className="absolute left-6 md:left-1/2 w-4 h-4 bg-white rounded-full transform md:-translate-x-1/2 z-10 shadow-lg">
-                  <div className="absolute inset-1 bg-portfolio-accent rounded-full"></div>
+              <AnimatedSection
+                key={index}
+                animation={index % 2 === 0 ? "fadeLeft" : "fadeRight"}
+                delay={index * 0.2}
+                className={`relative flex flex-col md:flex-row items-start md:items-center ${
+                  index % 2 === 0 ? 'md:flex-row-reverse' : ''
+                }`}
+              >
+                <div className="absolute left-6 md:left-1/2 w-4 h-4 rounded-full transform md:-translate-x-1/2 z-10 themed-gradient">
+                  <div className="absolute inset-1 rounded-full themed-surface"></div>
                 </div>
 
-                {/* Content Card */}
                 <div className={`ml-16 md:ml-0 ${
                   index % 2 === 0 ? 'md:mr-8 md:text-right' : 'md:ml-8'
                 } md:w-1/2`}>
-                  <div className="bg-white bg-opacity-10 backdrop-blur-sm rounded-xl p-6 card-shadow hover:bg-opacity-20 transition-all duration-300">
+                  <div className="themed-card rounded-xl p-6 hover:scale-105 transition-transform duration-300">
                     <div className="flex items-center mb-3">
-                      <GraduationCap className="w-6 h-6 mr-3" />
-                      <span className="text-sm font-medium bg-white bg-opacity-20 px-3 py-1 rounded-full">
+                      <GraduationCap className="w-6 h-6 mr-3" style={{ color: 'hsl(var(--themed-primary))' }} />
+                      <span className="text-sm font-medium px-3 py-1 rounded-full themed-surface">
                         {item.duration}
                       </span>
                     </div>
                     
-                    <h3 className="text-xl font-bold mb-2 font-poppins">{item.title}</h3>
-                    <h4 className="text-lg font-semibold mb-3 text-white text-opacity-90">{item.institution}</h4>
+                    <h3 className="text-xl font-bold mb-2 font-poppins" style={{ color: 'hsl(var(--themed-text))' }}>{item.title}</h3>
+                    <h4 className="text-lg font-semibold mb-3" style={{ color: 'hsl(var(--themed-text-secondary))' }}>{item.institution}</h4>
                     
                     <div className="flex items-center mb-3">
-                      <Award className="w-5 h-5 mr-2" />
-                      <span className="font-semibold">{item.details}</span>
+                      <Award className="w-5 h-5 mr-2" style={{ color: 'hsl(var(--themed-secondary))' }} />
+                      <span className="font-semibold" style={{ color: 'hsl(var(--themed-text))' }}>{item.details}</span>
                     </div>
                     
-                    <p className="text-white text-opacity-80 leading-relaxed">{item.description}</p>
+                    <p className="leading-relaxed" style={{ color: 'hsl(var(--themed-text-secondary))' }}>{item.description}</p>
                   </div>
                 </div>
-              </div>
+              </AnimatedSection>
             ))}
           </div>
         </div>
